@@ -4,17 +4,18 @@ class GamesController < ApplicationController
 
   def index
     @games = Game.all
-    render json: games
+    render json: @games
   end
 
   def create
     @game = Game.create(game_params)
-    render json: game
+    render json: @game, status: 201
   end
 
   def show
     binding.pry
-    render json: game
+    @game = Game.find(params[:id])
+    render json: @game
   end
 
   def update
@@ -22,11 +23,11 @@ class GamesController < ApplicationController
     render json: @game
   end
 
+  private
+
   def set_game
   @game = Game.find(params[:id])
   end
-
-  private
 
   def game_params
      params.permit(state: [])
