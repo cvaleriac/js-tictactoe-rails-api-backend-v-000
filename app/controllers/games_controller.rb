@@ -22,14 +22,14 @@ class GamesController < ApplicationController
     render json: @game
   end
 
+  def set_game
+  @game = Game.find(params[:id])
+  end
+
   private
 
   def game_params
      params.permit(state: [])
-  end
-
-  def set_game
-  @game = Game.find(params[:id])
   end
 
 end
